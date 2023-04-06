@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>messageApp</title>
+    <link rel="stylesheet" href="/messApp.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="header1">THE NUMBER GAME</div>
+      <br />
+      <div id="header2">Guess the number from 1 - 20!</div>
+      <div id="buttons">
+        <button id="reset" onclick="reload()">Reset</button>
+        <button id="two" onclick="start_playing()">Start</button> 
+        <div id="one"></div>
+        
+        <div id="three"></div>
+        <label for="name" class="score">SCORE: </label>
+        <div id="four"></div>
+      </div>
+      <br />
+      <br />
+      <div id="games2">
+        <div id="div">
+          <label for="guess" id="uguess">Your Guess: </label>
+          <input type="number" name="" id="guess-box" oninput="dismiss()" />
+          <span id="span2"><button id="btn23" onclick="go()">GO</button></span
+          ><br />
+          <br />
+          <div id="result20"></div>
+        </div>
+      </div>
+      <div id="set"></div>
+      <img
+        src="/folder/icons8-ball-point-pen-64.png"
+        alt=""
+        id="pen"
+        onclick="pen20()"
+      />
+      <img
+        src="/folder/icons8-secured-letter-48.png"
+        alt="img"
+        id="envlope1"
+        onclick="cont20()"
+      />
+      <p id="num30"></p>
+      <br />
+
+      <div id="container2">
+        <img
+          src="/folder/icons8-u-turn-to-left-64.png"
+          alt=""
+          id="uturn"
+          onclick="uturn()"
+        />
+        <ul id="list1"></ul>
+      </div>
+      <audio src="/folder/mixkit-audience-light-applause-354.wav" id="audio"></audio>
+      <textarea name="mytext" id="text1" cols="30" rows="10"></textarea> <br />
+      <br />
+      <button id="post">Post</button>
+    </div>
+
+    <script src="/messApp.js"></script>
+  </body>
+</html>

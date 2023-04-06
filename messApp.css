@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: whitesmoke;
+}
+
+#container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+#text1 {
+  margin-top: 260px;
+  width: 100vw;
+  height: 120px;
+  position: fixed;
+  font-style: normal;
+  font-size: medium;
+  font-weight: bold;
+  display: none;
+}
+#set {
+  position: absolute;
+  top: 0;
+  margin-left: 470px;
+  margin-top: 15px;
+}
+
+#envlope1 {
+  margin-top: 0px;
+  margin-left: 550px;
+  width: 35px;
+  top: 10px;
+  position: absolute;
+}
+
+#num30 {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  margin-left: 575px;
+  top: 7px;
+  color: whitesmoke;
+  font-size: 13px;
+  padding-left: 4px;
+  display: none;
+}
+
+/* #game1 {
+  position: absolute;
+  
+ } */
+
+#post {
+  margin-top: 350px;
+  margin-left: 550px;
+  width: 50px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: blue;
+  color: whitesmoke;
+  position: fixed;
+  display: none;
+}
+
+#pen {
+  width: 30px;
+  margin-left: 510px;
+  position: absolute;
+  top: 10px;
+}
+
+/* container2 */
+
+#container2 {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  position: absolute;
+  background-color: red;
+  background: rgba(900, 50, 50, 1);
+  display: none;
+}
+
+#uturn {
+  width: 30px;
+  margin: 8px;
+}
+
+#one {
+  width: 80px;
+  height: 40px;
+  background-color: green;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+#two {
+  width: 80px;
+  height: 40px;
+  background-color: blue;
+  border-radius: 10px;
+  opacity: 1;
+  font-weight: 900;
+  color: whitesmoke;
+  margin-left: 3px;
+}
+
+#reset {
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: blue;
+  border: none;
+  color: whitesmoke;
+  font-weight: 900;
+}
+
+#four {
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: solid;
+  color: whitesmoke;
+  font-weight: 900;
+  padding: 10px;
+}
+
+#buttons {
+  display: flex;
+  margin-left: 20px;
+  margin-top: 10px;
+  justify-content: space-between;
+  position: absolute;
+}
+#buttons div {
+  margin-left: 15px;
+}
+
+.score {
+  margin-top: 10px;
+}
+
+#games2 {
+  position: absolute;
+  top: 150px;
+}
+#div {
+  display: flex;
+  margin-top: 30px;
+  /* position: absolute; */
+}
+
+#result20 {
+  width: 150px;
+  height: 40px;
+  background-color: grey;
+  margin-left: 100px;
+  color: whitesmoke;
+  padding-left: 70px;
+  padding-top: 10px;
+  border-radius: 5px;
+}
+
+/* #div div {
+  margin-left: 15px;
+} */
+
+#header1 {
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+#btn23 {
+  width: 40px;
+  height: 30px;
+  background-color: blue;
+  border-radius: 8px;
+  color: whitesmoke;
+  margin-left: 7px;
+}
+#uguess {
+  margin-top: 10px;
+  font-weight: 900;
+}
+
+#guess-box {
+  margin-left: 5px;
+  border-radius: 5px;
+  font-weight: 900;
+  padding-left: 10px;
+}
