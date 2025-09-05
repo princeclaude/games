@@ -9,14 +9,14 @@ const InvitationsList = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { addToast } = useToast();
-  const socket = io("http://localhost:5000");
+  const socket = io(import.meta.env.VITE_API_URL);
 
   // ✅ Fetch invitations on mount
   useEffect(() => {
     const fetchInvitations = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/invite", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

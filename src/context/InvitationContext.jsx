@@ -36,10 +36,10 @@ export const useInvitations = () => {
       if (res.ok) {
         setInvitations(data.data || []);
       } else {
-        console.error("❌ Error from backend:", data.message);
+        console.error(" Error from backend:", data.message);
       }
     } catch (error) {
-      console.error("🔥 Network or parsing error fetching invitations:", error);
+      console.error("Network or parsing error fetching invitations:", error);
     } finally {
       setLoading(false);
     }
@@ -51,5 +51,5 @@ export const useInvitations = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return { invitations, loading, fetchInvitations };
+  return { invitations, loading, fetchInvitations };
 };
