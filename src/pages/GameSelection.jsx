@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import Layout from "../components/Layout";
 import { useToast } from "../context/ToastContext";
 
-const socket = io(import.meta.env.VITE_API, { withCredentials: true });
+const socket = io(import.meta.env.VITE_API_URL, { withCredentials: true });
 
 const GameSelection = () => {
   const { state } = useLocation();

@@ -51,13 +51,13 @@ const Explore = () => {
         
   console.log("📤 Sending invite payload:", {
     toUsername: user.username,
-    gameName: "FIFA 24",
+    gameName: "Game",
     type: "friendly-match",
   });
 
   const result = await sendInvite({
     toUsername: user.username,
-    gameName: "FIFA 24",
+    gameName: "Game",
     type: "friendly-match",
   });
 

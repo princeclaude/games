@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 
-const SOCKET_URL = import.meta.env.VITE_API_URL; // ✅ adjust if deployed
+const SOCKET_URL = import.meta.env.VITE_API_URL; 
 
 export const useVoiceChannel = () => {
   const [muted, setMuted] = useState(false);
@@ -72,7 +72,7 @@ export const useVoiceChannel = () => {
           }
         });
       } catch (err) {
-        console.error("🎙 Microphone access denied or error:", err);
+        console.error("Microphone access denied or error:", err);
       }
     };
 

@@ -43,7 +43,7 @@ const InvitationsList = () => {
   const handleAccept = async (inviteId, gameName) => {
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:5000/api/invite/accept", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite/accept`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,13 +79,13 @@ const InvitationsList = () => {
   } catch (err) {
     console.error("Error accepting invite:", err);
     addToast("Error accepting invite", "error");
-  }
+}
 };
   // ✅ Decline Invite
   const handleDecline = async (inviteId) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/invite/decline`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite/decline`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
