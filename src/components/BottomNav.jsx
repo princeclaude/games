@@ -1,8 +1,10 @@
 
 import { NavLink } from "react-router-dom";
-import { FaHome, FaBell,FaCompass, FaCog } from "react-icons/fa";
+import { FaHome, FaBell, FaCompass, FaCog } from "react-icons/fa";
+import { useInvitations } from "../context/InvitationContext";
 
 const BottomNav = ({ invitationCount = 0 }) => {
+  const { invitations } = useInvitations();
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 flex justify-around items-center py-2 z-50">
       <NavLink
@@ -39,9 +41,9 @@ const BottomNav = ({ invitationCount = 0 }) => {
       >
         <div className="relative">
           <FaBell className="text-lg" />
-          {invitationCount > 0 && (
+          {invitations.length > 0 && (
             <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
-              {invitationCount}
+              {invitations.length}
             </span>
           )}
         </div>
