@@ -15,7 +15,7 @@ const UserDashboard = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch("http://localhost:5000/api/user/me", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/me`, {
           headers: {
             "Authorization": `Bearer ${token}`,
           },
