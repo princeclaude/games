@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:5000"; // ✅ adjust if deployed
+
+const SOCKET_URL = import.meta.env.VITE_API_URL; // ✅ adjust if deployed
 
 export const useVoiceChannel = () => {
   const [muted, setMuted] = useState(false);

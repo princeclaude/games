@@ -1,4 +1,6 @@
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const sendInvite = async ({ toUsername, gameName, type }) => {
   try {
     const token = localStorage.getItem("token");
@@ -10,8 +12,9 @@ export const sendInvite = async ({ toUsername, gameName, type }) => {
         data: { message: "You must be logged in to send invites." },
       };
     }
+    const API_URL = import.meta.env.VITE_API_URL;
 
-    const res = await fetch("http://localhost:5000/api/invite", {
+    const res = await fetch(`${API_URL}/api/invite`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

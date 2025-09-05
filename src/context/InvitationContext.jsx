@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export const useInvitations = () => {
   const [invitations, setInvitations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchInvitations = async () => {
     try {
@@ -13,7 +14,7 @@ export const useInvitations = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/invite", {
+      const res = await fetch(`${API_URL}/api/invite`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

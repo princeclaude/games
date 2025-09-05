@@ -11,11 +11,13 @@ const UserDetails = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+ const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+        const res = await fetch(`${API_URL}/api/user/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
