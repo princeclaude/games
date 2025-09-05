@@ -1,30 +1,18 @@
-import { useState } from 'react'
-
-import { ToastProvider } from './context/ToastContext'
-
-import Navigation from './Navigation';
-import { useInvitations } from './context/InvitationContext';
-import { useInviteSocket } from './hooks/useInviteSocket';
-
-
-
-
+import { useInvitations } from "./context/InvitationContext";
+import { useInviteSocket } from "./hooks/useInviteSocket";
+import { ToastProvider } from "./context/ToastContext";
+import Navigation from "./Navigation";
 
 function App() {
   const { fetchInvitation } = useInvitations();
-  useInviteSocket(fetchInvitation);
-  
-  return (
-    <>
-      
 
-      <ToastProvider>
-       
-        <Navigation/>
-        
-      </ToastProvider>
-    </>
+  return (
+    <ToastProvider>
+      
+      {useInviteSocket(fetchInvitation)}
+      <Navigation />
+    </ToastProvider>
   );
 }
 
-export default App
+export default App;

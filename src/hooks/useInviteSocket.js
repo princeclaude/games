@@ -3,7 +3,7 @@ import { socket } from "../utils/socket";
 import { useToast } from "../context/ToastContext";
 
 export const useInviteSocket = (fetchInvitations) => {
-  const { addToast } = useToast();
+  const {addToast} = useToast();
   useEffect(() => {
     socket.on("new-invite", (invite) => {
       console.log("📩 New invite received:", invite);
