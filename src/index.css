@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@keyframes blink-red {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.2; }
+}
+
+@keyframes blink-yellow {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+@keyframes blink-green {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.1; }
+}
+
+.blink-red { animation: blink-red 1s infinite; }
+.blink-yellow { animation: blink-yellow 1s infinite; }
+.blink-green { animation: blink-green 0.8s infinite; }
+
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.5s ease forwards;
+}
+
+
+/* Gamepad bounce + tilt */
+@keyframes gamepad-move {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  25% { transform: translateY(-8%) rotate(-5deg) scale(1.05); }
+  50% { transform: translateY(-12%) rotate(5deg) scale(1.1); }
+  75% { transform: translateY(-8%) rotate(-3deg) scale(1.05); }
+}
+
+.animate-gamepad {
+  animation: gamepad-move 1s ease-in-out infinite;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.4));
+}
+
+/* Blinking buttons */
+@keyframes blink-red { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.2;} }
+@keyframes blink-yellow { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
+@keyframes blink-green { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.1;} }
+
+.animate-blink-red { animation: blink-red 1s infinite; }
+.animate-blink-yellow { animation: blink-yellow 0.8s infinite; }
+.animate-blink-green { animation: blink-green 0.9s infinite; }
+
+/* Glow effect for buttons */
+.glow {
+  box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+  animation: pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 6px 2px rgba(255,255,255,0.6); }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px 4px rgba(255,255,255,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 6px 2px rgba(255,255,255,0.6); }
+}
+
+/* Mini bounce + tilt for toast */
+@keyframes mini-gamepad-move {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  25% { transform: translateY(-5%) rotate(-3deg) scale(1.05); }
+  50% { transform: translateY(-8%) rotate(3deg) scale(1.08); }
+  75% { transform: translateY(-5%) rotate(-2deg) scale(1.05); }
+}
+
+.animate-mini-gamepad {
+  animation: mini-gamepad-move 1s ease-in-out infinite;
+}
+
+
+.glow-mini {
+  box-shadow: 0 0 4px 1px rgba(255,255,255,0.6);
+  animation: mini-pulse 1.2s infinite alternate;
+}
+
+@keyframes mini-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 4px 1px rgba(255,255,255,0.6); }
+  50% { transform: scale(1.15); box-shadow: 0 0 8px 2px rgba(255,255,255,0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 4px 1px rgba(255,255,255,0.6); }
+}
+
+/* Add this to your global CSS */
+.animated-gradient {
+  background: linear-gradient(-45deg, #6b21a8, #000000, #9333ea, #1a1a1a);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+}
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.sidebar-animate {
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.bottomnav-animate {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
