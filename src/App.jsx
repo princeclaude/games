@@ -8,11 +8,15 @@ function App() {
 
   return (
     <ToastProvider>
-      
-      {useInviteSocket(fetchInvitation)}
+      <InviteSocketWrapper fetchInvitation={fetchInvitation} />
       <Navigation />
     </ToastProvider>
   );
+}
+
+function InviteSocketWrapper({ fetchInvitation }) {
+  useInviteSocket(fetchInvitation);
+  return null; // this component just sets up the socket listener
 }
 
 export default App;
