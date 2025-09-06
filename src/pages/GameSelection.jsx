@@ -383,7 +383,7 @@ export default function GameSelection() {
         </div>
 
         {/* floating equalizer */}
-        <div className="fixed bottom-6 right-6 cursor-pointer" onClick={toggleMusic}>
+        <div className="fixed bottom-9 right-6 cursor-pointer" onClick={toggleMusic}>
           <div className="flex items-end space-x-1">
             {[1, 2, 3].map((i) => (
               <span
