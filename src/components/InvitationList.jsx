@@ -1,9 +1,9 @@
-// InvitationsList.jsx
-import { useEffect, useRef, useState } from "react";
+// src/components/InvitationsList.jsx
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GamepadLoader from "./GamepadLoader";
 import { useToast } from "../context/ToastContext";
-import { io } from "socket.io-client";
+import { socket } from "../utils/socket";
 
 const InvitationsList = () => {
   const [invitations, setInvitations] = useState([]);
@@ -11,31 +11,15 @@ const InvitationsList = () => {
   const navigate = useNavigate();
   const { addToast } = useToast();
 
-  // create a single socket instance for this component
-  const socketRef = useRef(null);
-  if (!socketRef.current) {
-    socketRef.current = io(import.meta.env.VITE_API_URL, {
-      withCredentials: true,
-      transports: ["websocket"],
-    });
-  }
-  const socket = socketRef.current;
-
   // Fetch invitations
   useEffect(() => {
     let mounted = true;
     const fetchInvitations = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/invite`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await res.json();
         if (mounted) {
           if (res.ok) setInvitations(data.data || []);
@@ -58,30 +42,24 @@ const InvitationsList = () => {
   const handleAccept = async (inviteId, gameName) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/invite/accept`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ invitationId: inviteId }),
-        }
-      );
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite/accept`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ invitationId: inviteId }),
+      });
 
       const data = await res.json();
 
       if (res.ok) {
-        // remove or mark invite as accepted locally
         setInvitations((prev) => prev.filter((inv) => inv._id !== inviteId));
-
         addToast("Invite accepted! Redirecting you to game selection...", "success");
 
-        // use roomId returned from backend (backend now returns roomId)
-        const roomId = data.roomId;
+        // backend should return roomId; if not, fallback to lobby_{inviteId}
+        const roomId = data.roomId || `lobby_${inviteId}`;
 
-        // navigate quickly with state including roomId
         navigate(`/game-selection?game=${encodeURIComponent(gameName)}`, {
           state: { roomId, autoPlayIntro: true },
         });
@@ -98,17 +76,14 @@ const InvitationsList = () => {
   const handleDecline = async (inviteId) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/invite/decline`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ invitationId: inviteId }),
-        }
-      );
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/invite/decline`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ invitationId: inviteId }),
+      });
 
       const data = await res.json();
       if (res.ok) {
@@ -123,38 +98,35 @@ const InvitationsList = () => {
     }
   };
 
-  // Real-time: listen for invite-accepted and redirect the inviter as well
+  // Listen for invite-accepted / invite-declined using shared socket
   useEffect(() => {
     const onInviteAccepted = (payload) => {
       console.log("Invite accepted event received:", payload);
       addToast(`${payload.by} accepted your invite! Redirecting...`, "success");
 
-      // If backend includes roomId in the payload (recommended), use it:
-      const navState = payload.roomId ? { state: { roomId: payload.roomId } } : {};
+      const roomId = payload.roomId;
+      const game = payload.gameName || "";
+
       setTimeout(() => {
-        navigate(
-          `/game-selection?game=${encodeURIComponent(payload.gameName)}`,
-          navState
-        );
-      }, 1500);
+        navigate(`/game-selection?game=${encodeURIComponent(game)}`, {
+          state: { roomId, autoPlayIntro: true },
+        });
+      }, 1200);
     };
 
-    socket.on("invite-accepted", onInviteAccepted);
-
-    // Also handle invite-declined if you want to show notifier
     const onInviteDeclined = (payload) => {
       addToast(`${payload.by} declined your invite.`, "info");
     };
+
+    socket.on("invite-accepted", onInviteAccepted);
     socket.on("invite-declined", onInviteDeclined);
 
     return () => {
       socket.off("invite-accepted", onInviteAccepted);
       socket.off("invite-declined", onInviteDeclined);
-      // Do NOT disconnect here if you expect this socket to be reused elsewhere in your app.
-      // If this socket is component-scoped and not reused, you can disconnect:
-      // socket.disconnect();
+      // DO NOT socket.disconnect() here — keep global socket alive
     };
-  }, [navigate, addToast, socket]);
+  }, [navigate, addToast]);
 
   if (loading)
     return (
@@ -163,8 +135,7 @@ const InvitationsList = () => {
       </div>
     );
 
-  if (!invitations.length)
-    return <p className="text-center mt-4 text-gray-400">No invites yet</p>;
+  if (!invitations.length) return <p className="text-center mt-4 text-gray-400">No invites yet</p>;
 
   return (
     <div className="p-4 space-y-3">
