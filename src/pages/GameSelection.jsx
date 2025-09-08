@@ -114,10 +114,7 @@ export default function GameSelection() {
         }
       };
 
-      // If we are the first in the room we should create an offer.
-      // Simple approach: ask server who's in room? We'll try to create an offer
-      // and rely on "offer/answer" signaling being forwarded.
-      // Create offer (this can be fine for two peers)
+      
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
       socket.emit("voice-offer", { roomId, offer });
@@ -167,6 +164,10 @@ export default function GameSelection() {
     socket.emit("game-selected", { roomId, game });
     addToast(`You selected ${game}`, "success");
   };
+
+  if (selectedGame === "Snake") {
+    navigate(`/snake`, { state: { roomId, game: selectedGame } });
+  }
 
   // If autoplay blocked we show overlay that user must tap to start audio + mic
   const handleUserInteractionToStart = async () => {

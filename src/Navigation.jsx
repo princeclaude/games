@@ -7,6 +7,7 @@ import Explore from "./pages/Explore";
 import UserDetails from "./pages/UserDetails";
 import Expect from "./pages/Expect";
 import GameSelection from "./pages/GameSelection";
+import SnakeGame from "./pages/SnakeGame";
 
 const Navigation = () => {
   const token = localStorage.getItem("token"); // check if logged in
@@ -26,6 +27,7 @@ const Navigation = () => {
       <Route path="/user/:id" element={<UserDetails />} />
       <Route path="/expect" element={<Expect />} />
       <Route path="/game-selection" element={<GameSelection />} />
+      <Route path="/snake" element={<SnakeGame />} />
 
       {/* Redirect all unknown routes */}
       <Route path="*" element={<Navigate to="/signin" />} />

@@ -33,6 +33,7 @@ function SocketRegistrar() {
 
   useEffect(() => {
     // register user if available
+    
     const userStr = localStorage.getItem("user");
     let username = null;
     if (userStr) {
@@ -65,7 +66,7 @@ function SocketRegistrar() {
       const by = payload.by || "Player";
       addToast(`${by} accepted — redirecting you`, "success");
 
-      // get roomId and gameName from payload, fallback to constructing a room id
+      
       const roomId = payload.roomId || `lobby_${payload.invitationId || payload._id}`;
       const game = payload.gameName || payload.game || (new URLSearchParams(window.location.search).get("game")) || "";
 
